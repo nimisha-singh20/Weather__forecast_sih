@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" style="margin: 0%; padding: 0%; height: 100%;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmer Information Form</title>
+    <style>
+        /* CSS Styles for Form Layout */
+        body {
+			background: linear-gradient(to right, #373B44, #4286f4);
+			font-family: 'Open Sans', sans-serif;
+			color: #fff;
+            background-image: url(farm.jpg);
+            
+            background-repeat: no-repeat;
+            background-size:cover;
+		}
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="tel"],
+        select {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        /* CSS Styles for Error Messages */
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Farmer Information Form</h2>
+        <form id="farmerForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+            
+            <label for="landArea">Land Area (in acres):</label>
+            <input type="number" id="landArea" name="landArea" style="width: 70%;" required>
+            <select id="areaUnit" name="areaUnit" style="width: 20%;">
+                <option value="acres">Acres</option>
+                <option value="squareMeters">Square Meters</option>
+            </select>
+            
+            <label>State</label>
+            <select id="state" name="state" required>
+                <option value="" disabled selected>Select a State</option>
+                <option value="" disabled selected>Enter your State</option>
+                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                <option value="Assam">Assam</option>
+                <option value="Bihar">Bihar</option>
+                <option value="Chhattisgarh">Chhattisgarh</option>
+                <option value="Goa">Goa</option>
+                <option value="Gujarat">Gujarat</option>
+                <option value="Haryana">Haryana</option>
+                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                <option value="Jharkhand">Jharkhand</option>
+                <option value="Karnataka">Karnataka</option>
+                <option value="Kerala">Kerala</option>
+                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                <option value="Maharashtra">Maharashtra</option>
+                <option value="Manipur">Manipur</option>
+                <option value="Meghalaya">Meghalaya</option>
+                <option value="Mizoram">Mizoram</option>
+                <option value="Nagaland">Nagaland</option>
+                <option value="Odisha">Odisha</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Rajasthan">Rajasthan</option>
+                <option value="Sikkim">Sikkim</option>
+                <option value="Tamil Nadu">Tamil Nadu</option>
+                <option value="Telangana">Telangana</option>
+                <option value="Tripura">Tripura</option>
+                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                <option value="Uttarakhand">Uttarakhand</option>
+                <option value="West Bengal">West Bengal</option>
+            </select>
+            
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+            
+            <label for="pincode">Pincode:</label>
+            <input type="text" id="pincode" name="pincode" required>
+            
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender">
+                <option value="" disabled selected>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <label for="numCrops">Number of Crops:</label>
+            <input type="number" id="numCrops" name="numCrops" required>
+            
+            <div id="cropFields" class="crop-fields">
+                <!-- Crop Name fields will be added dynamically -->
+            </div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+    
+    <script>
+        // JavaScript to populate the city and state fields based on the entered pincode
+        document.getElementById('pincode').addEventListener('input', function () {
+            const pincode = this.value.trim();
+            if (pincode.length === 6) {
+                fetch(https://api.zippopotam.us/IN/${pincode})
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.places && data.places.length > 0) {
+                            const cityInput = document.getElementById('city');
+                            const stateInput = document.getElementById('state');
+                            cityInput.value = data.places[0]['place name'];
+                            stateInput.value = data.places[0]['state'];
+                        } else {
+                            clearCityStateFields();
+                        }
+                    })
+                    .catch(() => {
+                        clearCityStateFields();
+                    });
+            } else {
+                clearCityStateFields();
+            }
+        });
+
+        function clearCityStateFields() {
+            const cityInput = document.getElementById('city');
+            const stateInput = document.getElementById('state');
+            cityInput.value = '';
+            stateInput.value = '';
+        }
+        
+        // JavaScript to add Crop Name fields dynamically
+        document.getElementById('numCrops').addEventListener('change', function () {
+            const numCrops = parseInt(this.value);
+            const cropFields = document.getElementById('cropFields');
+            
+            // Clear any previously added fields
+            cropFields.innerHTML = '';
+            
+            for (let i = 1; i <= numCrops; i++) {
+                const cropLabel = document.createElement('label');
+                cropLabel.textContent = Crop Name ${i}:;
+                const cropInput = document.createElement('input');
+                cropInput.setAttribute('type', 'text');
+                cropInput.setAttribute('name', cropName${i});
+                cropInput.setAttribute('required', 'true');
+                
+                cropFields.appendChild(cropLabel);
+                cropFields.appendChild(cropInput);
+            }
+
+            // Show the crop fields
+            cropFields.style.display = 'block';
+        });
+    </script>
+	
+</body>
+</html>

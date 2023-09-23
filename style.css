@@ -1,0 +1,167 @@
+/* Add styles for the forecast columns */
+.forecast-columns {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+
+
+.forecast-column h2 {
+  margin-top: 0;
+}
+
+/* Style the forecast items inside each column */
+.forecast-item {
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.forecast-icon {
+  width: 30px;
+  height: 30px;
+}
+
+.forecast-temp {
+  font-weight: bold;
+}
+
+/* Rest of your CSS styles (unchanged) */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  background: #222;
+  background-image: url('https://source.unsplash.com/1600x900/?landscape');
+  font-size: 120%;
+}
+
+.card {
+  background: #000000d0;
+  color: white;
+  padding: 2em;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 420px;
+  margin: 1em;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  margin: 0.5em;
+  border-radius: 50%;
+  border: none;
+  height: 44px;
+  width: 44px;
+  outline: none;
+  background: #7c7c7c2b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+input.search-bar {
+  border: none;
+  outline: none;
+  padding: 0.4em 1em;
+  border-radius: 24px;
+  background: #7c7c7c2b;
+  color: white;
+  font-family: inherit;
+  font-size: 105%;
+  width: calc(100% - 100px);
+}
+
+button:hover {
+  background: #7c7c7c6b;
+}
+
+h1.temp {
+  margin: 0;
+  margin-bottom: 0.4em;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.description {
+  text-transform: capitalize;
+  margin-left: 8px;
+}
+
+.weather.loading {
+  visibility: hidden;
+  max-height: 20px;
+  position: relative;
+}
+
+.weather.loading:after {
+  visibility: visible;
+  
+  color: white;
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+
+
+/* Position the auth-buttons div at the top right corner */
+.auth-buttons {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  right: 20px; /* Adjust the right position as needed */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+.auth-buttons button {
+  margin-left: 10px;
+  border-radius: 8px; 
+  border: none;
+  height: 44px;
+  width: 144px; 
+  outline: none;
+  background: #7c7c7c2b;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  font-size: 20px;
+  font-family:'Times New Roman', Times, serif
+}
+
+
+/* Add hover effect to the buttons */
+
+.auth-buttons button:hover {
+  background: #68adea6b;
+}
+
+
+
+.humidity {
+  font-size: 14px;
+  color: #666; /* Adjust the color as needed */
+  margin-top: 5px;
+}
+
+.wind {
+  font-size: 14px;
+  color: #666; /* Adjust the color as needed */
+  margin-top: 5px;
+}
+
